@@ -4,17 +4,20 @@
 #include <iostream>
 
 Entity::Entity(sf::Vector2f givenPosition):
-    texture("assets/sprites/missing.png"),
-    sprite(texture),
+    Object::Object(givenPosition),
     direction(0),
     walkSpeed(64),
     speed(walkSpeed),
     gravity(450)
 {
     // Proper setup
-    collisionBox.position = givenPosition;
     collisionBox.size = {14.f, 16.f};
 }
+
+void Entity::update() {
+    Object::update();
+}
+
 
 void Entity::update(float deltaTime, TileMap* map) {
     // x-axis
@@ -25,12 +28,7 @@ void Entity::update(float deltaTime, TileMap* map) {
     moveY(deltaTime, map);
 
     // update position
-    position = collisionBox.position;
-    sprite.setPosition(position);
-}
-
-void Entity::draw(sf::RenderWindow& window) {
-    window.draw(sprite);
+    Object::update();
 }
 
 void Entity::moveX(float deltaTime, TileMap* map) {
@@ -110,30 +108,3 @@ void Entity::collideY(sf::FloatRect tileRect, TileType tileType) {
 void Entity::onCollideY(TileType tileType) {
     velocity.y = 0;
 }
-
-void Entity::playAnimation(const std::string& name) {
-    if (currentAnimation != name){
-        currentAnimation = name;
-        animations.at(name).reset();
-    }
-    sprite.setTextureRect(animations.at(currentAnimation).getCurrentFrame());
-}
-
-
-void Entity::playAnimation(const std::string& name, float deltaTime) {
-    if (currentAnimation != name){
-        currentAnimation = name;
-        animations.at(name).reset();
-    }
-    animations.at(currentAnimation).update(deltaTime);
-    sprite.setTextureRect(animations.at(currentAnimation).getCurrentFrame());
-}
-
-sf::Vector2f Entity::getCentre() const {
-    float originX = position.x + collisionBox.size.x / 2;
-    float originY = position.y + collisionBox.size.y / 2;
-
-    return sf::Vector2f{originX, originY};
-}
-
-

@@ -1,8 +1,10 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <iostream>
 
 #include "player.h"
+#include "lantern.h"
 #include "light.h"
 
 int main() {
@@ -11,11 +13,13 @@ int main() {
 
     sf::Clock clock;
 
-    // Create Lights
+    // Create Light Textures
     sf::RenderTexture darknessTexture({128,128});
     sf::RenderTexture glowTexture({128, 128});
 
+    // Create Lights & Lanterns
     LightObject light(sf::Color::White, 63, 8);
+    Lantern lantern({112.f, 80.f}, true);
 
     // Load Map
     TileMap map;
@@ -65,6 +69,8 @@ int main() {
         // Update functions
         player.update(deltaTime, &map);
         light.update(player.getCentre());
+        lantern.update();
+        std::cout << lantern.getCentre().x << '\n';
 
         // Configure render targets
         window.setView(camera);
@@ -77,8 +83,11 @@ int main() {
         glowTexture.clear(sf::Color::Transparent);
 
         // Draw glows and darkness cutouts to respective texture
+        lantern.drawLight(darknessTexture);
         light.draw(darknessTexture);
-        light.draw(glowTexture);
+        if (lantern.isIgnited()){
+            lantern.drawLight(glowTexture);
+        }
 
         // Finalise and update texture data
         darknessTexture.display();
@@ -91,9 +100,10 @@ int main() {
         // Draw to the screen
         // We want the Player to be able to be obscured by darkness if needed.
         window.draw(map);
-        window.draw(glowSprite, sf::BlendAdd);
-        player.draw(window);
         window.draw(darknessSprite, sf::BlendMultiply);
+        window.draw(glowSprite, sf::BlendAdd);
+        lantern.draw(window);
+        player.draw(window);
 
         // Finalise and update the screen!
         window.display();

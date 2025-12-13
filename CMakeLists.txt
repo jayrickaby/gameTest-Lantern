@@ -4,7 +4,7 @@ project(gametest-lantern)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-add_executable(gametest-lantern main.cpp animation.cpp entity.cpp light.cpp player.cpp tilemap.cpp)
+add_executable(gametest-lantern main.cpp animation.cpp entity.cpp lantern.cpp light.cpp object.cpp player.cpp tilemap.cpp)
 
 find_package(SFML 3.0 COMPONENTS Graphics Audio REQUIRED)
 
