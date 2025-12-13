@@ -19,7 +19,7 @@ Some challenges I faced:
 - Music that plays in the background, that dynamically changes based on what the player has done
 
 ## Gallery
-<img src="https://github.com/user-attachments/assets/a367b9d2-855c-4a96-a51c-701566beac77" width="320" />
+https://github.com/user-attachments/assets/7b8db032-19dd-40f1-bece-3631d24ff9ce
 
 
 ## Build & Run
