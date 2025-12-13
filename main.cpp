@@ -7,6 +7,8 @@
 #include "lantern.h"
 #include "light.h"
 
+// Copyright (c) 2025 Jay Rickaby
+
 int main() {
     sf::RenderWindow window(sf::VideoMode({1024,1024}), "Lantern Test");
     sf::View camera(sf::FloatRect({0.f, 0.f}, {128.f,128.f}));
@@ -70,6 +72,8 @@ int main() {
         player.update(deltaTime, &map);
         light.update(player.getCentre());
         lantern.update();
+
+        // Ignites the lantern, fades in layer two of music
         if (!lantern.isIgnited()){
             if (player.getCollisionBox().findIntersection(lantern.getCollisionBox())){
                 lantern.setIgnited();

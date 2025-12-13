@@ -3,6 +3,8 @@
 #include "object.h"
 #include "tilemap.h"
 
+// Copyright (c) 2025 Jay Rickaby
+
 class TileMap;
 
 class Entity : public Object{

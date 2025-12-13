@@ -1,10 +1,10 @@
 #pragma once
 
-class Animation{
+// Copyright (c) 2025 Jay Rickaby
 
+class Animation{
 public:
     Animation(std::vector<sf::IntRect> givenFrames, float givenFrameTime);
-    //Animation(std::vector<sf::IntRect> frames, float frameTime, bool looping);
     void update(float deltaTime);
     sf::IntRect getCurrentFrame();
     void reset();

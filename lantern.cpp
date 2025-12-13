@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include "lantern.h"
 
+// Copyright (c) 2025 Jay Rickaby
+
 Lantern::Lantern(sf::Vector2f givenPosition, float setIgnited):
     Object::Object(givenPosition),
     ignited(setIgnited),
@@ -24,6 +26,7 @@ void Lantern::update() {
 
     sf::Vector2f centre = getCentre();
 
+    // Different conditions for on/off
     if (ignited){
         playAnimation("on");
         lightOn.update(centre);
@@ -35,6 +38,7 @@ void Lantern::update() {
 }
 
 void Lantern::drawLight(sf::RenderTarget& target){
+    // Different conditions for on/off
     if (ignited){
         lightOn.draw(target);
     }

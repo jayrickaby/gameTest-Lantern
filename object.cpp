@@ -1,4 +1,7 @@
+#include <SFML/Graphics.hpp>
 #include "object.h"
+
+// Copyright (c) 2025 Jay Rickaby
 
 Object::Object(sf::Vector2f givenPosition):
     texture("assets/sprites/missing.png"),

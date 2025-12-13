@@ -2,6 +2,8 @@
 #include "entity.h"
 #include <SFML/Graphics.hpp>
 
+// Copyright (c) 2025 Jay Rickaby
+
 class Player : public Entity{
 public:
     // Core Functions

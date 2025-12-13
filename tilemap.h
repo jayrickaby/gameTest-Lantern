@@ -1,5 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+
+// Copyright (c) 2025 Jay Rickaby
+
 enum class TileType {
     Air = 0,
     Solid = 1,

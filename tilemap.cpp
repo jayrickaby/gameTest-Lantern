@@ -1,4 +1,8 @@
+#include <SFML/Graphics.hpp>
 #include "tilemap.h"
+
+// Copyright (c) 2025 Jay Rickaby
+
 bool TileMap::load(const std::filesystem::path& givenTileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height)
 {
     levelData = tiles;

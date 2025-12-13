@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 
+// Copyright (c) 2025 Jay Rickaby
 
 class LightObject{
 public:

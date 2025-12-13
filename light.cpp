@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include "light.h"
 
+// Copyright (c) 2025 Jay Rickaby
+
 LightObject::LightObject(sf::Color givenColour, uint givenSize, int givenSteps):
     colour(givenColour),
     size(givenSize),
@@ -28,6 +30,9 @@ sf::Image LightObject::createLightGradient() {
     float center = size / 2.f;
     float radius = size / 2.f;
 
+
+    // This radial gradient generator is NOT mine.
+    // However, I cannot find the source -  probably because I adapted it to work.
     for (uint8_t y = 0; y < size; y++) {
         for (uint8_t x = 0; x < size; x++) {
             float dx = x - center;

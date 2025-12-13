@@ -3,6 +3,8 @@
 #include "light.h"
 #include "object.h"
 
+// Copyright (c) 2025 Jay Rickaby
+
 class Lantern : public Object{
 public:
     // Core Methods

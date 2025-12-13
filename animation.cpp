@@ -1,11 +1,11 @@
 #include <SFML/Graphics.hpp>
 #include "animation.h"
 
+// Copyright (c) 2025 Jay Rickaby
 
 Animation::Animation(std::vector<sf::IntRect> givenFrames, float givenFrameTime){
     frames = givenFrames;
     frameTime = givenFrameTime;
-    //looping = true;
 }
 
 void Animation::update(float deltaTime){

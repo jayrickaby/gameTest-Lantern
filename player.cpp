@@ -2,6 +2,8 @@
 #include "entity.h"
 #include "player.h"
 
+// Copyright (c) 2025 Jay Rickaby
+
 Player::Player(sf::Vector2f givenPosition):
     Entity::Entity(sf::Vector2f(givenPosition)),
     jumpStrength(150.f),

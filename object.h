@@ -3,6 +3,8 @@
 #include <map>
 #include "animation.h"
 
+// Copyright (c) 2025 Jay Rickaby
+
 class Object{
 public:
     Object(sf::Vector2f givenPosition);
