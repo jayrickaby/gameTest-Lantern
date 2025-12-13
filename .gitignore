@@ -42,6 +42,9 @@
 # End of https://www.toptal.com/developers/gitignore/api/c++,kdevelop4
 
 ### Extra stuff from Jay
+# Aseprite
+*.aseprite
+
 # Build Folder
 build/
 
