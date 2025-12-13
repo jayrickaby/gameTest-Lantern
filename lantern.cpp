@@ -4,7 +4,7 @@
 Lantern::Lantern(sf::Vector2f givenPosition, float setIgnited):
     Object::Object(givenPosition),
     ignited(setIgnited),
-    lightOff(sf::Color::White, 24, 4),
+    lightOff(sf::Color::White, 33, 8),
     lightOn(sf::Color::Yellow, 65, 8),
     offRect({0,0}, {16,16}),
     onRect({16,0}, {16,16})
