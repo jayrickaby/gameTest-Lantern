@@ -1,6 +1,69 @@
-#include <iostream>
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 
-int main(int argc, char **argv) {
-    std::cout << "Hello, world!" << std::endl;
+#include "player.h"
+#include "light.h"
+
+int main() {
+    sf::RenderWindow window(sf::VideoMode({1024,1024}), "Lantern Test");
+    sf::View camera(sf::FloatRect({0.f, 0.f}, {128.f,128.f}));
+    std::vector<int> levelData{
+        14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
+        14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
+        14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
+        14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
+        14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
+        14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
+        14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
+        14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
+        14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
+        14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
+        14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
+        14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
+        6,  7,  8,  9,  6,  7,  8,  9,  6,  7,  8,  9,  6,  7,  8,  9,
+        10, 11, 12, 13, 10, 11, 12, 13, 10, 11, 12, 13, 10, 11, 12, 13,
+        10, 11, 12, 13, 10, 11, 12, 13, 10, 11, 12, 13, 10, 11, 12, 13,
+        10, 11, 12, 13, 10, 11, 12, 13, 10, 11, 12, 13, 10, 11, 12, 13
+    };
+    Player player({50.f,50.f});
+    sf::Clock clock;
+
+    sf::RenderTexture darknessTexture({128,128});
+    LightObject light(64, 8);
+    TileMap map;
+    map.load("assets/sprites/spritesheet.png", {8, 8}, levelData.data(), 16, 16);
+
+    while (window.isOpen()){
+        while (const std::optional event = window.pollEvent()){
+            if (event->is<sf::Event::Closed>()){
+                window.close();
+            }
+        }
+        float deltaTime = clock.restart().asSeconds();
+
+        player.update(deltaTime, &map);
+        light.update(player.getCentre());
+
+        darknessTexture.setView(camera);
+        darknessTexture.clear(sf::Color::Black);
+
+        light.render(darknessTexture);
+
+        darknessTexture.display();
+        window.clear();
+
+        window.setView(camera);
+        window.draw(map);
+
+        // Draw the texture
+        sf::Sprite darknessSprite(darknessTexture.getTexture());
+
+        window.draw(darknessSprite, sf::BlendMultiply);
+
+        player.render(window);
+
+        window.display();
+    }
+
     return 0;
 }

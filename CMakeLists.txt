@@ -2,9 +2,9 @@ cmake_minimum_required(VERSION 3.16)
 
 project(gametest-lantern)
 
-add_executable(gametest-lantern main.cpp)
-
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+add_executable(gametest-lantern main.cpp animation.cpp entity.cpp light.cpp player.cpp tilemap.cpp)
 
 find_package(SFML 3.0 COMPONENTS Graphics REQUIRED)
 
