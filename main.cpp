@@ -13,7 +13,9 @@ int main() {
 
     // Create Lights
     sf::RenderTexture darknessTexture({128,128});
-    LightObject light(sf::Color::Yellow, 63, 8);
+    sf::RenderTexture glowTexture({128, 128});
+
+    LightObject light(sf::Color::White, 63, 8);
 
     // Load Map
     TileMap map;
@@ -52,8 +54,6 @@ int main() {
     // Load Player
     Player player({50.f,50.f});
 
-
-
     while (window.isOpen()){
         while (const std::optional event = window.pollEvent()){
             if (event->is<sf::Event::Closed>()){
@@ -62,28 +62,40 @@ int main() {
         }
         float deltaTime = clock.restart().asSeconds();
 
+        // Update functions
         player.update(deltaTime, &map);
         light.update(player.getCentre());
 
-        darknessTexture.setView(camera);
-        darknessTexture.clear(sf::Color::Black);
-
-        light.render(darknessTexture);
-
-        darknessTexture.display();
-        window.clear();
-
+        // Configure render targets
         window.setView(camera);
-        window.draw(map);
+        darknessTexture.setView(camera);
+        glowTexture.setView(camera);
 
-        // Draw the texture
+        // Clear Screen and Textures
+        window.clear();
+        darknessTexture.clear(sf::Color::Black);
+        glowTexture.clear(sf::Color::Transparent);
+
+        // Draw glows and darkness cutouts to respective texture
+        light.draw(darknessTexture);
+        light.draw(glowTexture);
+
+        // Finalise and update texture data
+        darknessTexture.display();
+        glowTexture.display();
+
+        // Construct sprites from source textures
         sf::Sprite darknessSprite(darknessTexture.getTexture());
+        sf::Sprite glowSprite(glowTexture.getTexture());
 
-        window.draw(darknessSprite, sf::BlendAdd);
+        // Draw to the screen
+        // We want the Player to be able to be obscured by darkness if needed.
+        window.draw(map);
+        window.draw(glowSprite, sf::BlendAdd);
+        player.draw(window);
         window.draw(darknessSprite, sf::BlendMultiply);
 
-        player.render(window);
-
+        // Finalise and update the screen!
         window.display();
     }
 

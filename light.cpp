@@ -17,7 +17,7 @@ void LightObject::update(sf::Vector2f givenPosition) {
     lightSprite.setPosition(givenPosition);
 }
 
-void LightObject::render(sf::RenderTexture &cutoutTexture) {
+void LightObject::draw(sf::RenderTexture &cutoutTexture) {
     cutoutTexture.draw(lightSprite);
 }
 

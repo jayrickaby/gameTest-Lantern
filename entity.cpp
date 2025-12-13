@@ -29,7 +29,7 @@ void Entity::update(float deltaTime, TileMap* map) {
     sprite.setPosition(position);
 }
 
-void Entity::render(sf::RenderWindow& window) {
+void Entity::draw(sf::RenderWindow& window) {
     window.draw(sprite);
 }
 

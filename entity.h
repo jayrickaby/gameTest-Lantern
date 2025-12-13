@@ -44,7 +44,7 @@ public:
     Entity(sf::Vector2f givenPosition);
     //virtual ~Entity();
     virtual void update (float deltaTime, TileMap* map);
-    virtual void render (sf::RenderWindow& window);
+    virtual void draw (sf::RenderWindow& window);
 
     // Getters
     sf::Vector2f getPosition() const { return position; };
