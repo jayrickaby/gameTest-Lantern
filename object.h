@@ -10,8 +10,11 @@ public:
     virtual void draw (sf::RenderTarget& target) const;
 
     // Getters
-    sf::Vector2f getPosition() const { return position; };
     sf::Vector2f getCentre() const;
+    sf::Vector2f getPosition() const { return position; };
+
+    sf::FloatRect getCollisionBox() const { return collisionBox;}
+
 protected:
     // Core Attributes
     sf::Vector2f position;

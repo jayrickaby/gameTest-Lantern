@@ -19,7 +19,7 @@ int main() {
 
     // Create Lights & Lanterns
     LightObject light(sf::Color::White, 63, 8);
-    Lantern lantern({112.f, 80.f}, true);
+    Lantern lantern({112.f, 80.f}, false);
 
     // Load Map
     TileMap map;
@@ -53,7 +53,7 @@ int main() {
     musicLayerOne.play();
     musicLayerTwo.play();
 
-    musicLayerTwo.setVolume(0.0f);
+    musicLayerTwo.setVolume(0);
 
     // Load Player
     Player player({50.f,50.f});
@@ -70,7 +70,17 @@ int main() {
         player.update(deltaTime, &map);
         light.update(player.getCentre());
         lantern.update();
-        std::cout << lantern.getCentre().x << '\n';
+        if (!lantern.isIgnited()){
+            if (player.getCollisionBox().findIntersection(lantern.getCollisionBox())){
+                lantern.setIgnited();
+            }
+        } else {
+            if (musicLayerTwo.getVolume() < 100){
+                musicLayerTwo.setVolume(musicLayerTwo.getVolume() + 12.5 *deltaTime);
+            } else {
+                musicLayerTwo.setVolume(100.f);
+            }
+        }
 
         // Configure render targets
         window.setView(camera);

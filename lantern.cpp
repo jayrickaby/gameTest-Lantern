@@ -43,3 +43,7 @@ void Lantern::drawLight(sf::RenderTarget& target){
     }
 }
 
+void Lantern::setIgnited() {
+    ignited = true;
+}
+

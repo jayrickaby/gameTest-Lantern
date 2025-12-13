@@ -13,6 +13,9 @@ public:
     // Getters
     bool isIgnited() const {return ignited;}
 
+    // Setter
+    void setIgnited();
+
 private:
     // Core Attributes
     bool ignited = false;
