@@ -10,6 +10,7 @@ LightObject::LightObject(sf::Color givenColour, uint givenSize, int givenSteps):
     lightSprite(lightTexture)
 {
     lightSprite.setOrigin({static_cast<float>(size) / 2, static_cast<float>(size) / 2});
+    lightSprite.setColor(colour);
 };
 
 void LightObject::update(sf::Vector2f givenPosition) {
@@ -42,9 +43,14 @@ sf::Image LightObject::createLightGradient() {
 
             // Set pixel to grayscale value
             uint8_t gray = static_cast<uint8_t>(brightness * 255);
-            gradient.setPixel({x, y}, colour * sf::Color(gray, gray, gray));
+            gradient.setPixel({x, y}, sf::Color(gray, gray, gray));
         }
     }
 
     return gradient;
+}
+
+void LightObject::setColor(sf::Color newColour) {
+    colour = newColour;
+    lightSprite.setColor(colour);
 }
