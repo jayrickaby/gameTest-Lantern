@@ -1,14 +1,15 @@
 #include <SFML/Graphics.hpp>
 #include "light.h"
 
-LightObject::LightObject(uint givenSize, int givenSteps):
+LightObject::LightObject(sf::Color givenColour, uint givenSize, int givenSteps):
+    colour(givenColour),
     size(givenSize),
-    lightGradient(createLightGradient(size, givenSteps)),
+    steps(givenSteps),
+    lightGradient(createLightGradient()),
     lightTexture(lightGradient),
     lightSprite(lightTexture)
 {
-
-    lightSprite.setOrigin({size/2,size/2});
+    lightSprite.setOrigin({static_cast<float>(size) / 2, static_cast<float>(size) / 2});
 };
 
 void LightObject::update(sf::Vector2f givenPosition) {
@@ -20,7 +21,7 @@ void LightObject::render(sf::RenderTexture &cutoutTexture) {
 }
 
 
-sf::Image LightObject::createLightGradient(uint size, int steps) {
+sf::Image LightObject::createLightGradient() {
     sf::Image gradient({size, size}, sf::Color::Black);
 
     float center = size / 2.f;
@@ -41,7 +42,7 @@ sf::Image LightObject::createLightGradient(uint size, int steps) {
 
             // Set pixel to grayscale value
             uint8_t gray = static_cast<uint8_t>(brightness * 255);
-            gradient.setPixel({x, y}, sf::Color(gray, gray, gray));
+            gradient.setPixel({x, y}, colour * sf::Color(gray, gray, gray));
         }
     }
 

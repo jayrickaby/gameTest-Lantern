@@ -28,8 +28,11 @@ int main() {
     Player player({50.f,50.f});
     sf::Clock clock;
 
+    // Create Lights
     sf::RenderTexture darknessTexture({128,128});
-    LightObject light(64, 8);
+    LightObject light(sf::Color::White, 63, 8);
+
+    // Load Map
     TileMap map;
     map.load("assets/sprites/spritesheet.png", {8, 8}, levelData.data(), 16, 16);
 
@@ -58,6 +61,7 @@ int main() {
         // Draw the texture
         sf::Sprite darknessSprite(darknessTexture.getTexture());
 
+        window.draw(darknessSprite, sf::BlendAdd);
         window.draw(darknessSprite, sf::BlendMultiply);
 
         player.render(window);

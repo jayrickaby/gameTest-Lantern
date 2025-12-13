@@ -5,15 +5,17 @@
 
 class LightObject{
 public:
-    LightObject(uint givenSize, int givenSteps);
+    LightObject(sf::Color givenColour, uint givenSize, int givenSteps);
     void update(sf::Vector2f givenPosition);
     void render(sf::RenderTexture &cutoutTexture);
 private:
-    float size;
+    sf::Color colour;
+    uint size;
+    uint steps;
 
     sf::Image lightGradient;
     sf::Texture lightTexture;
     sf::Sprite lightSprite;
 
-    sf::Image createLightGradient(uint size, int steps);
+    sf::Image createLightGradient();
 };
