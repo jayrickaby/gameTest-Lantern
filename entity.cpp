@@ -3,6 +3,8 @@
 #include "tilemap.h"
 #include <iostream>
 
+// Copyright (c) 2025 Jay Rickaby
+
 Entity::Entity(sf::Vector2f givenPosition):
     Object::Object(givenPosition),
     direction(0),
